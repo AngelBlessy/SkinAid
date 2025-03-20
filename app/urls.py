@@ -24,6 +24,17 @@ urlpatterns = [
     path("reset_password_api/", views.reset_password_api),
     path("predict_result_api/", views.predict_result_api),
     path("logout/", views.logout_view),
+    path("drdeepak/", views.drdeepak),
+    path("profile/", views.newprofile),
+    path("drdinesh/", views.drdinesh),
+    path("dreswari/", views.dreswari),
+    path("drharish/", views.drharish),
+    path("drneha/", views.drneha),
+    path("drparthasarathi/", views.drparthasarathi),
+    path("drsavitha/", views.drsavitha),
+    path("drshashidar/", views.drshashidar),
+    path("drsheelavathi/", views.drsheelavathi),
+    path("drshishira/", views.drshishira),
     # miscellaneous
     path("add_doctor_dict/", views.add_doctor_dict),
 ]

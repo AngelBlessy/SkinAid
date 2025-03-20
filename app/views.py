@@ -144,6 +144,42 @@ def drdeepak(request):
     return render(request, "drdeepak.html")
 
 
+def drdinesh(request):
+    return render(request, "drdinesh.html")
+
+
+def dreswari(request):
+    return render(request, "dreswari.html")
+
+
+def drharish(request):
+    return render(request, "drharish.html")
+
+
+def drneha(request):
+    return render(request, "drneha.html")
+
+
+def drparthasarathi(request):
+    return render(request, "drparthasarathi.html")
+
+
+def drsavitha(request):
+    return render(request, "drsavitha.html")
+
+
+def drshashidar(request):
+    return render(request, "drshashidar.html")
+
+
+def drsheelavathi(request):
+    return render(request, "drsheelavathi.html")
+
+
+def drshishira(request):
+    return render(request, "drshishira.html")
+
+
 def login_api(request):
     if request.method == "POST":
         username = request.POST.get("username")
