@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctor Appointment</title>
+  
+  <style>
+    html {
+      height: 100%;
+    }
+    
+    body {
+      margin: 0;
+    }
+    
+    .bg {
+      animation: slide 5s ease-in-out infinite alternate;
+      background-image: linear-gradient(-60deg, #333 50%, #777 50%);
+      bottom: 0;
+      left: -50%;
+      opacity: 0.7;
+      position: fixed;
+      right: -50%;
+      top: 0;
+      z-index: -1;
+    }
+    
+    .bg2 {
+      animation-direction: alternate-reverse;
+      animation-duration: 6s;
+    }
+    
+    .bg3 {
+      animation-duration: 7s;
+    }
+    
+    .content {
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 0.25em;
+      box-shadow: 0 0 0.25em rgba(0, 0, 0, 0.25);
+      box-sizing: border-box;
+      left: 50%;
+      padding: 10vmin;
+      position: fixed;
+      text-align: center;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    h1 {
+      font-family: monospace;
+    }
+    
+    @keyframes slide {
+      0% {
+        transform: translateX(-20%);
+      }
+      100% {
+        transform: translateX(20%);
+      }
+    }
+    
+    /* General Body Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+          background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(50, 50, 50, 0.7)); /* Gradient for a sleek look */
+            color: white;
+            padding: 20px 10px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+    }
+    .translate-button{
+      padding: 12px 25px;
+      font-size: 16px;
+      color: black;
+      background: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 10px;
+      transition: all 0.3s ease;
+  }
+  
+    .custom-alert {
+  position: fixed;
+  top: 10px; /* Positioned at the top */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ff4444;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  z-index: 9999;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  opacity: 1; /* Initially fully visible */
+  transition: opacity 2s ease-in-out; /* Fade out over 2 seconds */
+}
+
+    .form-container {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      text-align: center;
+    }
+
+    .holiday-note {
+      font-size: 1rem;
+      color: #d9534f; /* Red */
+      margin-bottom: 15px;
+    }
+
+    .form-container select,
+    .form-container input {
+      width: 90%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .form-container button {
+      padding: 12px 25px;
+            font-size: 16px;
+            color: white;
+            background: linear-gradient(45deg, #868b8e, #0a0708);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+    }
+
+    .form-container button:hover {
+      background: linear-gradient(30deg,#D9DFC6, #727D73);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 8px black;
+    }
+
+    footer {
+      margin-top: auto;
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(50, 50, 50, 0.7));
+      color: white;
+      padding: 20px 10px;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    footer .developer-text {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    footer .developer-info {
+      display: flex;
+      justify-content: space-between;
+      width: 80%;
+      margin: 10px auto;
+      font-size: 18px;
+    }
+
+    footer .developer-info p {
+      text-align: center;
+      flex: 1;
+    }
+
+    footer a {
+      color: #FFCCBC; /* Soft coral links */
+      text-decoration: underline;
+    }
+
+    footer a:hover {
+      color: #FFE0B2; /* Lighter coral hover */
+    }footer {
+            margin-top: auto;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(50, 50, 50, 0.7));
+            color: white;
+            text-align: center;
+            padding: 20px 10px;
+            font-size: 14px;
+        }
+
+        footer p {
+            margin: 5px 0;
+            
+        }
+        footer .developer-text {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        footer .developer-info {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            margin-left: 10%;
+            font-size: 18px;
+        }
+  </style>
+</head>
+<body>
+  <header>
+    Doctor appointment booking
+  </header>
+  <div class="translate-container">
+    <button class="translate-button" onclick="toggleTranslate()">🌐 Translate</button>
+    <div id="google_translate_element" style="display: none;"></div>
+</div>
+
+<script>
+  function toggleTranslate() {
+      var element = document.getElementById("google_translate_element");
+      if (element.style.display === "none") {
+          element.style.display = "block";
+      } else {
+          element.style.display = "none";
+      }
+  }
+
+  function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+          pageLanguage: 'en',
+          includedLanguages: 'hi,bn,te,mr,ta,ur,gu,ml,kn,pa,or,as', // Indian languages
+          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+
+      // Apply saved translation language
+      var lang = localStorage.getItem("selectedLanguage");
+      if (lang) {
+          setTimeout(() => {
+              document.querySelector("select.goog-te-combo").value = lang;
+              document.querySelector("select.goog-te-combo").dispatchEvent(new Event('change'));
+          }, 2000); // Delay to ensure translation loads
+      }
+  }
+
+  // Listen for language selection and store in localStorage
+  document.addEventListener("change", function(event) {
+      if (event.target.classList.contains("goog-te-combo")) {
+          localStorage.setItem("selectedLanguage", event.target.value);
+      }
+  });
+</script>
+
+<!-- Load Google Translate API -->
+<script type="text/javascript" 
+        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+</script>
+  <div class="bg"></div>
+  <div class="bg bg2"></div>
+  <div class="bg bg3"></div>
+  <div class="container">
+    <div class="form-container">
+      <h3>Patient Details</h3>
+      
+
+    <!-- Patient Name -->
+    <label for="name">Patient Name</label>
+    <input type="text" id="name" placeholder="Enter full name" required>
+
+    <!-- Age -->
+    <label for="age">Age</label>
+<input type="number" id="age" placeholder="Enter age" required oninput="validateAge()" onblur="validateAge()">
+
+<!-- Gender -->
+    <label for="gender">Gender</label>
+    <select id="gender" required>
+      <option value="">-- Select Gender --</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select>
+
+      <h3>Select Date and Time</h3>
+
+      <!-- Holiday Note -->
+      <p class="holiday-note">Holidays: Sundays, 2nd & 4th Saturdays</p>
+
+      <!-- Date Picker -->
+      <label for="date">Select Date:</label>
+      <input type="date" id="date" required>
+
+      <!-- Time Slot Selection -->
+      <label for="time">Select Time:</label>
+      <select id="time" required>
+        <option value="">-- Select Time --</option>
+        <option value="09:00 AM">09:00 AM</option>
+        <option value="10:00 AM">10:00 AM</option>
+        <option value="11:00 AM">11:00 AM</option>
+        <option value="12:00 PM">12:00 PM</option>
+        <option value="01:00 PM">01:00 PM</option>
+        <option value="02:00 PM">02:00 PM</option>
+        <option value="03:00 PM">03:00 PM</option>
+        <option value="04:00 PM">04:00 PM</option>
+        <option value="05:00 PM">05:00 PM</option>
+        <option value="06:00 PM">06:00 PM</option>
+        <option value="07:00 PM">07:00 PM</option>
+        <option value="08:00 PM">08:00 PM</option>
+        <option value="09:00 PM">09:00 PM</option>
+      </select>
+
+      <!-- Submit Button -->
+      <!-- Book Appointment Button -->
+<!-- Book Appointment Button -->
+<button class="form-container button"id="book-appointment" onclick="bookAppointment()">Book Appointment</button>
+
+
+    </div>
+  </div>
+
+  <script>
+    function validateAge() {
+  let ageInput = document.getElementById('age');
+  let ageValue = parseInt(ageInput.value);
+
+  if (isNaN(ageValue) || ageValue < 1 || ageValue > 120) {
+    ageInput.value = ""; // Clear input field
+    ageInput.focus(); // Keep focus on the field for correction
+    showCustomAlert("Please enter a valid age between 1 and 120.");
+  }
+}
+
+function showCustomAlert(message) {
+  const alertBox = document.createElement('div');
+  alertBox.classList.add('custom-alert');
+  alertBox.textContent = message;
+
+  document.body.appendChild(alertBox);
+
+  // Remove the alert box after 2 seconds (fading out)
+  setTimeout(() => {
+    alertBox.style.opacity = '0'; // Fade out over 2 seconds
+    setTimeout(() => alertBox.remove(), 100); // Remove after fade out
+  }, 100); // Alert stays for 2 seconds before fading
+}
+    // Function to display the custom alert
+    function showCustomAlert(message) {
+      const alertBox = document.createElement('div');
+      alertBox.classList.add('custom-alert');
+      alertBox.textContent = message;
+
+      document.body.appendChild(alertBox);
+
+      // Remove the alert box after 5 seconds
+      setTimeout(() => {
+        alertBox.remove();
+      }, 2000);
+    }
+
+    // Function to check if the date is valid (not a Sunday or 2nd/4th Saturday)
+    // Function to check if the date is valid (not a Sunday or 2nd/4th Saturday)
+function isValidDate(date) {
+  const selectedDate = new Date(date);
+  const dayOfWeek = selectedDate.getDay(); // 0 = Sunday, 6 = Saturday
+  const currentDate = new Date();
+  const maxDate = new Date();
+  maxDate.setMonth(currentDate.getMonth() + 3); // Allow dates within the next 3 months
+
+  // Check if the date is in the past, a Sunday, or a 2nd/4th Saturday
+  if (selectedDate < currentDate) {
+    return false; // Date can't be in the past
+  }
+  if (dayOfWeek === 0) { // Sunday
+    return false;
+  }
+  
+  // Calculate the week number in the month
+  const dayOfMonth = selectedDate.getDate();
+  const weekOfMonth = Math.floor((dayOfMonth - 1) / 7) + 1; // 1 = 1st week, 2 = 2nd week, etc.
+
+  // Check if it's a 2nd or 4th Saturday
+  if (dayOfWeek === 6 && (weekOfMonth === 2 || weekOfMonth === 4)) {
+    return false; // 2nd/4th Saturday is not allowed
+  }
+
+  // Check if the date is within the allowed range (today to 3 months ahead)
+  if (selectedDate > maxDate) {
+    return false; // Date can't be more than 3 months ahead
+  }
+
+  return true; // Valid date
+}
+
+// Function to handle appointment booking
+function bookAppointment() {
+  const date = document.getElementById('date').value;
+  const time = document.getElementById('time').value;
+  const name = document.getElementById('name').value;
+  const age = document.getElementById('age').value;
+  const gender = document.getElementById('gender').value;
+
+  // Check if both date and time are selected
+  if (!date || !time) {
+    alert('Please select both a date and time.');
+    return; // Exit the function if either date or time is missing
+  }
+
+  // Validate the date
+  if (!isValidDate(date)) {
+    alert('Please select a valid date. The date must be today or within the next 3 months, and it cannot be a Sunday or 2nd/4th Saturday.');
+    return; // Exit the function if the date is invalid
+  }
+
+  // If all validations pass, save the selected date and time to localStorage
+  localStorage.setItem('selectedDate', date);
+  localStorage.setItem('selectedTime', time);
+  localStorage.setItem('selectedName', name);
+  localStorage.setItem('selectedAge', age);
+  localStorage.setItem('selectedGender', gender);
+
+  // Redirect to api after all validations are successful
+  window.location.href = '/api2'; // This will take the user to the api page
+}
+document.getElementById("appointment-form").addEventListener("submit", function(event) {
+  event.preventDefault(); // Prevent form from submitting
+
+  // Get form values
+  const name = document.getElementById("name").value;
+  const age = document.getElementById("age").value;
+  const gender = document.getElementById("gender").value;
+  const date = document.getElementById("date").value;
+  const time = document.getElementById("time").value;
+  const payment = false; // Payment not done
+
+  // Store values in localStorage
+  localStorage.setItem("name", name);
+  localStorage.setItem("age", age);
+  localStorage.setItem("gender", gender);
+  localStorage.setItem("date", date);
+  localStorage.setItem("time", time);
+  localStorage.setItem("payment", payment);
+
+  // Confirmation message
+  document.getElementById("confirmation-message").textContent = "Appointment details saved successfully!";
+});
+
+  </script>
+
+  <footer>
+    <!-- Designed and Developed By Text -->
+    <p class="developer-text">Designed and Developed by:</p>
+
+    <!-- Developer Information with Equal Spacing Between Names -->
+    <div class="developer-info">
+      <p>Angel Blessy</p>
+      <p>Anna Bino</p>
+      <p>Bhavani K</p>
+    </div>
+    <p>Need help? Visit our <a href="sup">Support Page</a> or <a href="contact">Contact Us</a>.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="/static/login.css" />
+    <style>
+      .login-error {
+        color: #ff3860;
+        background-color: rgba(255, 56, 96, 0.1);
+        border: 1px solid #ff3860;
+        border-radius: 4px;
+        padding: 10px;
+        margin-bottom: 15px;
+        text-align: center;
+        display: none;
+      }
+      .login-error.visible {
+        display: block;
+      }
+      .forgot-password {
+        text-align: left;
+        margin-bottom: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg"></div>
+    <div class="bg bg2"></div>
+    <div class="bg bg3"></div>
+    <header>Skin Cancer Detection & Classification</header>
+    <div class="translate-container">
+      <button class="translate-button" onclick="toggleTranslate()">
+        🌐 Translate
+      </button>
+      <div id="google_translate_element" style="display: none"></div>
+    </div>
+
+    <!-- Load Google Translate API -->
+    <script
+      type="text/javascript"
+      src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    ></script>
+
+    <div class="container">
+      <div class="image-container">
+        <img src="/static/logo.png" alt="Skin Cancer Detection Image" />
+      </div>
+
+      <div class="form-container">
+        <h2>Login</h2>
+
+        <!-- Error message container -->
+        <div id="loginError" class="login-error"></div>
+
+        <form action="/login_api/" method="post">
+          {% csrf_token %}
+          <div class="input-container">
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Username"
+            />
+            <p id="usernameError" class="error-message"></p>
+          </div>
+          <div class="input-container">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Password"
+            />
+            <p id="passwordError" class="error-message"></p>
+          </div>
+          <div class="forgot-password">
+            <a href="/forgotpassword">Forgot Password?</a>
+          </div>
+          <div class="button-group">
+            <button type="submit" onclick="validateAndRedirect()">Login</button>
+            <button type="button" onclick="location.href='/Signin'">
+              Sign Up
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <footer>
+      <p class="developer-text">Designed and Developed by:</p>
+      <div class="developer-info">
+        <p>Angel Blessy</p>
+        <p>Anna Bino</p>
+        <p>Bhavani K</p>
+      </div>
+      <p>
+        Need help? Visit our <a href="/sup">Support Page</a> or
+        <a href="/contact">Contact Us</a>.
+      </p>
+    </footer>
+
+    <script>
+      // Get URL parameters to check for error messages
+      function getUrlParams() {
+        let params = {};
+        let queryString = window.location.search.slice(1);
+        let pairs = queryString.split("&");
+
+        for (let i = 0; i < pairs.length; i++) {
+          let pair = pairs[i].split("=");
+          params[decodeURIComponent(pair[0])] = decodeURIComponent(
+            pair[1] || ""
+          );
+        }
+        return params;
+      }
+
+      // Check for error parameters and display appropriate messages
+      window.onload = function () {
+        let params = getUrlParams();
+        let loginError = document.getElementById("loginError");
+
+        if (params.error) {
+          if (params.error === "user_not_found") {
+            loginError.textContent =
+              "Account does not exist. Please sign up first.";
+            loginError.classList.add("visible");
+          } else if (params.error === "invalid_password") {
+            loginError.textContent = "Invalid password. Please try again.";
+            loginError.classList.add("visible");
+          }
+        }
+      };
+
+      function validateAndRedirect() {
+        let username = document.getElementById("username").value.trim();
+        let password = document.getElementById("password").value.trim();
+        let usernameError = document.getElementById("usernameError");
+        let passwordError = document.getElementById("passwordError");
+
+        let passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+        // Reset previous error messages
+        usernameError.textContent = "";
+        passwordError.textContent = "";
+
+        let isValid = true;
+
+        // Username validation
+        if (username.length < 3) {
+          usernameError.textContent =
+            "Username must be at least 3 characters long.";
+          isValid = false;
+        }
+
+        // Password validation
+        if (!passwordPattern.test(password)) {
+          passwordError.textContent =
+            "Password must be at least 8 characters long and contain both letters and numbers.";
+          isValid = false;
+        }
+
+        // If validation fails, prevent form submission
+        if (!isValid) {
+          event.preventDefault();
+        }
+      }
+    </script>
+
+    <script>
+      function toggleTranslate() {
+        var element = document.getElementById("google_translate_element");
+        if (element.style.display === "none") {
+          element.style.display = "block";
+        } else {
+          element.style.display = "none";
+        }
+      }
+
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+          {
+            pageLanguage: "en",
+            includedLanguages: "hi,bn,te,mr,ta,ur,gu,ml,kn,pa,or,as", // Indian languages
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+          },
+          "google_translate_element"
+        );
+
+        // Apply saved translation language
+        var lang = localStorage.getItem("selectedLanguage");
+        if (lang) {
+          setTimeout(() => {
+            document.querySelector("select.goog-te-combo").value = lang;
+            document
+              .querySelector("select.goog-te-combo")
+              .dispatchEvent(new Event("change"));
+          }, 2000); // Delay to ensure translation loads
+        }
+      }
+
+      // Listen for language selection and store in localStorage
+      document.addEventListener("change", function (event) {
+        if (event.target.classList.contains("goog-te-combo")) {
+          localStorage.setItem("selectedLanguage", event.target.value);
+        }
+      });
+    </script>
+  </body>
+</html>

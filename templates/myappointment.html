@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Appointment Details</title>
+
+    <style>
+      html {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+      }
+
+      .bg {
+        animation: slide 5s ease-in-out infinite alternate;
+        background-image: linear-gradient(-60deg, #333 50%, #777 50%);
+        bottom: 0;
+        left: -50%;
+        opacity: 0.7;
+        position: fixed;
+        right: -50%;
+        top: 0;
+        z-index: -1;
+      }
+
+      .bg2 {
+        animation-direction: alternate-reverse;
+        animation-duration: 6s;
+      }
+
+      .bg3 {
+        animation-duration: 7s;
+      }
+
+      .content {
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 0.25em;
+        box-shadow: 0 0 0.25em rgba(0, 0, 0, 0.25);
+        box-sizing: border-box;
+        left: 50%;
+        padding: 10vmin;
+        position: fixed;
+        text-align: center;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      h1 {
+        font-family: monospace;
+      }
+
+      @keyframes slide {
+        0% {
+          transform: translateX(-20%);
+        }
+        100% {
+          transform: translateX(20%);
+        }
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #e3f2fd; /* Soft sky blue for a medical, calming theme */
+        color: #00332e; /* Deep teal for headings and text */
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      /* Header Section */
+      header {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(50, 50, 50, 0.7));
+        color: white;
+        padding: 20px 10px;
+        text-align: center;
+        font-size: 28px;
+        font-weight: bold;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        position: relative;
+      }
+
+      /* Logout Button */
+      .logout-container {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+      }
+
+      /* Home Button */
+      .home-container {
+        position: absolute;
+        top: 10px;
+        left: 20px;
+      }
+
+      .home-button {
+        padding: 8px 15px;
+        background: linear-gradient(45deg, #868b8e, #0a0708);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+
+      .home-button:hover {
+        background: linear-gradient(30deg, #d9dfc6, #727d73);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      }
+
+      .logout-button {
+        padding: 8px 15px;
+        background: linear-gradient(45deg, #d32f2f, #b71c1c);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+
+      .logout-button:hover {
+        background: linear-gradient(45deg, #f44336, #d32f2f);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+        gap: 20px;
+      }
+      .appointment-card {
+        width: 60%;
+        background-color: white;
+        padding: 15px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .left-side,
+      .right-side {
+        text-align: left;
+      }
+      .payment-success {
+        color: red;
+        font-weight: bold;
+      }
+      .translate-button {
+        padding: 12px 25px;
+        font-size: 16px;
+        color: black;
+        background: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 10px;
+        transition: all 0.3s ease;
+      }
+      footer {
+        margin-top: auto;
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(50, 50, 50, 0.7));
+        color: white;
+        padding: 20px 10px;
+        font-size: 14px;
+        text-align: center;
+      }
+
+      footer .developer-text {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+
+      footer .developer-info {
+        display: flex;
+        justify-content: space-between;
+        width: 80%;
+        margin: 10px auto;
+        font-size: 18px;
+      }
+
+      footer .developer-info p {
+        text-align: center;
+        flex: 1;
+      }
+
+      footer a {
+        color: #ffccbc; /* Soft coral links */
+        text-decoration: underline;
+      }
+
+      footer a:hover {
+        color: #ffe0b2; /* Lighter coral hover */
+      }
+      footer {
+        margin-top: auto;
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(50, 50, 50, 0.7));
+        color: white;
+        text-align: center;
+        padding: 20px 10px;
+        font-size: 14px;
+      }
+
+      footer p {
+        margin: 5px 0;
+      }
+      footer .developer-text {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+
+      footer .developer-info {
+        display: flex;
+        justify-content: space-between;
+        width: 80%;
+        margin-left: 10%;
+        font-size: 18px;
+      }
+
+      /* Styles for the appointments list */
+      .appointments-list-container {
+        width: 80%;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        margin-bottom: 20px;
+      }
+
+      .appointments-list-container h2 {
+        color: #00332e;
+        text-align: center;
+        margin-bottom: 15px;
+        font-size: 24px;
+      }
+
+      .appointments-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .appointments-table th {
+        background-color: #00332e;
+        color: white;
+        padding: 10px;
+        text-align: left;
+      }
+
+      .appointments-table td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .appointments-table tr:hover {
+        background-color: #f5f5f5;
+      }
+
+      .no-appointments {
+        text-align: center;
+        color: #757575;
+        font-style: italic;
+        padding: 20px;
+      }
+
+      .new-appointment-btn {
+        padding: 10px 20px;
+        background: linear-gradient(45deg, #868b8e, #0a0708);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 15px;
+        transition: all 0.3s ease;
+      }
+
+      .new-appointment-btn:hover {
+        background: linear-gradient(30deg, #d9dfc6, #727d73);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 15px;
+      }
+
+      /* User info display */
+      .user-info {
+        margin-top: 10px;
+        text-align: center;
+        color: white;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg"></div>
+    <div class="bg bg2"></div>
+    <div class="bg bg3"></div>
+
+    <header>
+      Appointment Details
+      <div class="home-container">
+        <a href="/Detectionscreen/"
+          ><button class="home-button">Back to Home</button></a
+        >
+      </div>
+      <div class="logout-container">
+        <a href="/logout/"><button class="logout-button">Logout</button></a>
+      </div>
+      {% if request.user.is_authenticated %}
+      <div class="user-info">Logged in as: {{ request.user.username }}</div>
+      {% endif %}
+    </header>
+
+    <div class="translate-container">
+      <button class="translate-button" onclick="toggleTranslate()">
+        🌐 Translate
+      </button>
+      <div id="google_translate_element" style="display: none"></div>
+    </div>
+
+    <div class="container">
+      <!-- Appointments List Section -->
+      <div class="appointments-list-container">
+        <h2>Your Appointments</h2>
+        {% if appointments %}
+        <table class="appointments-table">
+          <thead>
+            <tr>
+              <th>Patient Name</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Doctor</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for appointment in appointments %}
+            <tr>
+              <td>{{ appointment.patientname }}</td>
+              <td>{{ appointment.date }}</td>
+              <td>{{ appointment.time }}</td>
+              <td>{{ appointment.doctorname }}</td>
+              <td>Confirmed</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <p class="no-appointments">
+          You don't have any appointments scheduled yet.
+        </p>
+        {% endif %}
+        <div class="btn-container">
+          <a href="/newappointment/">
+            <button class="new-appointment-btn">
+              Schedule New Appointment
+            </button>
+          </a>
+        </div>
+      </div>
+
+      <!-- Current Appointment Details (if present) -->
+      {% if name and doctorname %}
+      <div class="appointment-card">
+        <div class="left-side">
+          <p><strong>Name:</strong> <span id="display-name">{{name}}</span></p>
+          <p><strong>Age:</strong> <span id="display-age">{{age}}</span></p>
+          <p>
+            <strong>Gender:</strong> <span id="display-gender">{{gender}}</span>
+          </p>
+          <p>
+            <strong>Doctor's Name:</strong>
+            <span id="display-docname">{{doctorname}}</span>
+          </p>
+        </div>
+        <div class="right-side">
+          <p><strong>Date:</strong> <span id="display-date">{{date}}</span></p>
+          <p><strong>Time:</strong> <span id="display-time">{{time}}</span></p>
+          <p class="payment-success">
+            <strong>Payment Status:</strong
+            ><span id="display-payment">Successful</span>
+          </p>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+
+    <footer>
+      <p class="developer-text">Designed and Developed by:</p>
+      <div class="developer-info">
+        <p>Angel Blessy</p>
+        <p>Anna Bino</p>
+        <p>Bhavani K</p>
+      </div>
+      <p>
+        Need help? Visit our <a href="sup">Support Page</a> or
+        <a href="contact">Contact Us</a>.
+      </p>
+    </footer>
+
+    <script>
+      function toggleTranslate() {
+        var element = document.getElementById("google_translate_element");
+        if (element.style.display === "none") {
+          element.style.display = "block";
+        } else {
+          element.style.display = "none";
+        }
+      }
+
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+          {
+            pageLanguage: "en",
+            includedLanguages: "hi,bn,te,mr,ta,ur,gu,ml,kn,pa,or,as", // Indian languages
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+          },
+          "google_translate_element"
+        );
+
+        // Apply saved translation language
+        var lang = localStorage.getItem("selectedLanguage");
+        if (lang) {
+          setTimeout(() => {
+            document.querySelector("select.goog-te-combo").value = lang;
+            document
+              .querySelector("select.goog-te-combo")
+              .dispatchEvent(new Event("change"));
+          }, 2000); // Delay to ensure translation loads
+        }
+      }
+
+      // Listen for language selection and store in localStorage
+      document.addEventListener("change", function (event) {
+        if (event.target.classList.contains("goog-te-combo")) {
+          localStorage.setItem("selectedLanguage", event.target.value);
+        }
+      });
+    </script>
+
+    <!-- Load Google Translate API -->
+    <script
+      type="text/javascript"
+      src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    ></script>
+  </body>
+</html>

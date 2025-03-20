@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Appointment Success</title>
+  <style>
+    html {
+      height: 100%;
+    }
+    
+    body {
+      margin: 0;
+    }
+    
+    .bg {
+      animation: slide 5s ease-in-out infinite alternate;
+      background-image: linear-gradient(-60deg, #333 50%, #777 50%);
+      bottom: 0;
+      left: -50%;
+      opacity: 0.7;
+      position: fixed;
+      right: -50%;
+      top: 0;
+      z-index: -1;
+    }
+    
+    .bg2 {
+      animation-direction: alternate-reverse;
+      animation-duration: 6s;
+    }
+    
+    .bg3 {
+      animation-duration: 7s;
+    }
+    
+    .content {
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 0.25em;
+      box-shadow: 0 0 0.25em rgba(0, 0, 0, 0.25);
+      box-sizing: border-box;
+      left: 50%;
+      padding: 10vmin;
+      position: fixed;
+      text-align: center;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    h1 {
+      font-family: monospace;
+    }
+    
+    @keyframes slide {
+      0% {
+        transform: translateX(-20%);
+      }
+      100% {
+        transform: translateX(20%);
+      }
+    }
+    
+  body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+  }
+
+  /* Header Section */
+  header {
+background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(50, 50, 50, 0.7));
+color: white;
+padding: 20px 10px;
+text-align: center;
+font-size: 28px;
+font-weight: bold;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+  
+  .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-grow: 1;
+      padding: 50px 20px;
+      flex-wrap: wrap;
+  }
+  
+  .image-container {
+      width: 40%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+  }
+  .image-container img {
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 4px solid #727D73;
+  }
+  
+  .form-container {
+      width: 50%;
+      padding: 20px;
+      background: linear-gradient(30deg, #D9DFC6, #727D73);
+      border-radius: 15px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+  .form-container h2 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: black;
+  }
+  
+  .input-container {
+      margin-bottom: 20px;
+  }
+  input[type="text"], input[type="password"] {
+      padding: 12px 15px;
+      font-size: 14px;
+      width: 90%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+  }
+  
+  .error-message {
+      color: red;
+      font-size: 14px;
+      margin-top: 5px;
+  }
+  
+  .forgot-password {
+      font-size: 14px;
+      color: #1769aa;
+      cursor: pointer;
+  }
+  
+  .button-group button {
+      padding: 12px 25px;
+      font-size: 16px;
+      color: white;
+      background: linear-gradient(45deg, #868b8e, #0a0708);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 10px;
+  }
+  footer {
+      margin-top: auto;
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(50, 50, 50, 0.7));
+      color: white;
+      padding: 20px 10px;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    footer .developer-text {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    footer .developer-info {
+      display: flex;
+      justify-content: space-between;
+      width: 80%;
+      margin: 10px auto;
+      font-size: 18px;
+    }
+
+    footer .developer-info p {
+      text-align: center;
+      flex: 1;
+    }
+
+    footer a {
+      color: #FFCCBC; /* Soft coral links */
+      text-decoration: underline;
+    }
+
+    footer a:hover {
+      color: #FFE0B2; /* Lighter coral hover */
+    }footer {
+            margin-top: auto;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(50, 50, 50, 0.7));
+            color: white;
+            text-align: center;
+            padding: 20px 10px;
+            font-size: 14px;
+        }
+
+        footer p {
+            margin: 5px 0;
+            
+        }
+        footer .developer-text {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        footer .developer-info {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            margin-left: 10%;
+            font-size: 18px;
+        }
+
+        .success-container {
+    position: absolute; /* Positions the container */
+    top: 48%; /* Moves it down */
+    left: 50%; /* Centers it horizontally */
+    transform: translate(-50%, -50%); /* Ensures perfect centering */
+    background-color: #777;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.678);
+    text-align: center;
+    max-width: 90%;
+    width: 400px;
+}
+
+
+    .success-container h2 {
+      color:white;
+    }
+    .success-container p{
+      color: white;
+    }
+
+    .success-container a {
+      padding: 10px 15px;
+            font-size: 16px;
+            color: white;
+            background: linear-gradient(45deg, #868b8e, #0a0708);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+    }
+   
+   
+
+    .success-container a:hover {
+      background-color:linear-gradient(45deg, #868b8e, #0a0708);
+    }
+
+    .translate-button{
+          padding: 12px 25px;
+          font-size: 16px;
+          color: black;
+          background: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          margin: 10px;
+          transition: all 0.3s ease;
+      }
+    
+
+    .developer-info {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      font-size: 18px;
+    }
+
+    footer a {
+      color: #FFCCBC;
+      text-decoration: underline;
+    }
+
+    footer a:hover {
+      color: #FFE0B2;
+    }
+    
+    @media (max-width: 600px) {
+      .success-container {
+        width: 90%;
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>Skin Cancer Detection and Classification</header>
+  <div class="bg"></div>
+  <div class="bg bg2"></div>
+  <div class="bg bg3"></div>
+  <div class="translate-container">
+    <button class="translate-button" onclick="toggleTranslate()">🌐 Translate</button>
+    <div id="google_translate_element" style="display: none;"></div>
+</div>
+
+<script>
+  function toggleTranslate() {
+      var element = document.getElementById("google_translate_element");
+      if (element.style.display === "none") {
+          element.style.display = "block";
+      } else {
+          element.style.display = "none";
+      }
+  }
+
+  function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+          pageLanguage: 'en',
+          includedLanguages: 'hi,bn,te,mr,ta,ur,gu,ml,kn,pa,or,as', // Indian languages
+          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+
+      // Apply saved translation language
+      var lang = localStorage.getItem("selectedLanguage");
+      if (lang) {
+          setTimeout(() => {
+              document.querySelector("select.goog-te-combo").value = lang;
+              document.querySelector("select.goog-te-combo").dispatchEvent(new Event('change'));
+          }, 2000); // Delay to ensure translation loads
+      }
+  }
+
+  // Listen for language selection and store in localStorage
+  document.addEventListener("change", function(event) {
+      if (event.target.classList.contains("goog-te-combo")) {
+          localStorage.setItem("selectedLanguage", event.target.value);
+      }
+  });
+</script>
+
+<!-- Load Google Translate API -->
+<script type="text/javascript" 
+        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+</script>
+
+  
+
+  <div class="success-container">
+    <h2>Appointment Confirmed!</h2>
+    <p>Thank you for your payment. Your appointment is successfully booked.</p>
+    <a href="Detectionscreen">Back to Home</a>
+  </div>
+  
+  <footer>
+    <p class="developer-text">Designed and Developed by:</p>
+    <div class="developer-info">
+      <p>Angel Blessy</p>
+      <p>Anna Bino</p>
+      <p>Bhavani K</p>
+    </div>
+    <p>Need help? Visit our <a href="sup">Support Page</a> or <a href="contact">Contact Us</a>.</p>
+  </footer>
+</body>
+</html>

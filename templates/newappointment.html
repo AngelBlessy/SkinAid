@@ -1,0 +1,434 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctor Consultation</title>
+  
+  <style>
+    html {
+      height: 100%;
+    }
+    
+    body {
+      margin: 0;
+    }
+    
+    .bg {
+      animation: slide 5s ease-in-out infinite alternate;
+      background-image: linear-gradient(-60deg, #333 50%, #777 50%);
+      bottom: 0;
+      left: -50%;
+      opacity: 0.7;
+      position: fixed;
+      right: -50%;
+      top: 0;
+      z-index: -1;
+    }
+    
+    .bg2 {
+      animation-direction: alternate-reverse;
+      animation-duration: 6s;
+    }
+    
+    .bg3 {
+      animation-duration: 7s;
+    }
+    
+    .content {
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 0.25em;
+      box-shadow: 0 0 0.25em rgba(0, 0, 0, 0.25);
+      box-sizing: border-box;
+      left: 50%;
+      padding: 10vmin;
+      position: fixed;
+      text-align: center;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    h1 {
+      font-family: monospace;
+    }
+    
+    @keyframes slide {
+      0% {
+        transform: translateX(-20%);
+      }
+      100% {
+        transform: translateX(20%);
+      }
+    }
+    
+    /* General Body Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Header Section */
+    header {
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(50, 50, 50, 0.7));
+      color: white;
+      padding: 20px 10px;
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+
+    /* Grid Container */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      flex: 1; /* Ensures the grid expands to fill available space */
+    }
+
+    /* Individual Doctor Card */
+    .card {
+      background: linear-gradient(30deg,#D9DFC6, #727D73);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      text-align: center;
+      padding: 20px;
+      border: 2px solid black;
+    }
+
+    .card img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+      border: 2px solid black;
+    }
+
+    .card h3 {
+      margin: 10px 0;
+      font-size: 1rem;
+      color: #333;
+    }
+
+    .card p {
+      margin: 5px 0;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .card button {
+      margin: 10px 5px;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    /* Buttons */
+    .consult-btn {
+      background: linear-gradient(45deg, #868b8e, #0a0708);
+      color: #fff;
+    }
+
+    .consult-btn:hover {
+      background: linear-gradient(45deg, #868b8e, #0a0708);
+      transform: translateY(-2px); /* Subtle lift effect */
+    }
+
+    .appointment-btn {
+      background: linear-gradient(45deg, #868b8e, #0a0708);
+      color: #fff;
+    }
+
+    .appointment-btn:hover {
+      background: linear-gradient(45deg, #868b8e, #0a0708);
+      transform: translateY(-2px); /* Subtle lift effect */
+    }
+
+    /* View Details */
+    .view-details {
+      display: block;
+      margin: 10px 0 0; /* Space above link */
+      color: #333;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .view-details:hover {
+      color: #333;
+      transform: translateY(-2px);
+    }
+
+    /* Footer Section */
+    footer {
+      margin-top: auto;
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(50, 50, 50, 0.7));
+      color: white;
+      padding: 20px 10px;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    footer .developer-text {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    footer .developer-info {
+      display: flex;
+      justify-content: space-between;
+      width: 80%;
+      margin: 10px auto;
+      font-size: 18px;
+    }
+
+    footer .developer-info p {
+      text-align: center;
+      flex: 1;
+    }
+
+    footer a {
+      color: #FFCCBC; /* Soft coral links */
+      text-decoration: underline;
+    }
+
+    footer a:hover {
+      color: #FFE0B2; /* Lighter coral hover */
+    }footer {
+            margin-top: auto;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(50, 50, 50, 0.7));
+            color: white;
+            text-align: center;
+            padding: 20px 10px;
+            font-size: 14px;
+        }
+
+        footer p {
+            margin: 5px 0;
+            
+        }
+        footer .developer-text {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        footer .developer-info {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            margin-left: 10%;
+            font-size: 18px;
+        }
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header {
+        font-size: 24px;
+        padding: 15px 10px;
+      }
+
+      .card img {
+        width: 70px;
+        height: 70px;
+      }
+
+      .card h3 {
+        font-size: 0.9rem;
+      }
+
+      .card button {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+      }
+
+      footer .developer-info {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+    .translate-button{
+      padding: 12px 25px;
+      font-size: 16px;
+      color: black;
+      background: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 10px;
+      transition: all 0.3s ease;
+  }
+
+    @media (max-width: 480px) {
+      header {
+        font-size: 20px;
+      }
+
+      .card {
+        padding: 15px;
+      }
+
+      .card img {
+        width: 60px;
+        height: 60px;
+      }
+
+      .card h3 {
+        font-size: 0.85rem;
+      }
+
+      .card button {
+        padding: 5px 8px;
+        font-size: 0.75rem;
+      }
+
+      footer {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    Doctor available for consultation
+  </header>
+  <div class="bg"></div>
+  <div class="bg bg2"></div>
+  <div class="bg bg3"></div>
+  <div class="translate-container">
+    <button class="translate-button" onclick="toggleTranslate()">🌐 Translate</button>
+    <div id="google_translate_element" style="display: none;"></div>
+</div>
+
+<script>
+  function toggleTranslate() {
+      var element = document.getElementById("google_translate_element");
+      if (element.style.display === "none") {
+          element.style.display = "block";
+      } else {
+          element.style.display = "none";
+      }
+  }
+
+  function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+          pageLanguage: 'en',
+          includedLanguages: 'hi,bn,te,mr,ta,ur,gu,ml,kn,pa,or,as', // Indian languages
+          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+
+      // Apply saved translation language
+      var lang = localStorage.getItem("selectedLanguage");
+      if (lang) {
+          setTimeout(() => {
+              document.querySelector("select.goog-te-combo").value = lang;
+              document.querySelector("select.goog-te-combo").dispatchEvent(new Event('change'));
+          }, 2000); // Delay to ensure translation loads
+      }
+  }
+
+  // Listen for language selection and store in localStorage
+  document.addEventListener("change", function(event) {
+      if (event.target.classList.contains("goog-te-combo")) {
+          localStorage.setItem("selectedLanguage", event.target.value);
+      }
+  });
+</script>
+
+<!-- Load Google Translate API -->
+<script type="text/javascript" 
+        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+</script>
+
+  <p align="center" style="font-size: 18px; color: white;">
+    Choose a doctor to proceed with your consultation or book an appointment
+  </p>
+
+  <!-- Doctor Cards Grid -->
+  <main>
+    <div class="grid-container" id="doctor-container"></div>
+  </main>
+
+  <!-- Footer Section -->
+  <footer>
+    <!-- Designed and Developed By Text -->
+    <p class="developer-text">Designed and Developed by:</p>
+
+    <!-- Developer Information with Equal Spacing Between Names -->
+    <div class="developer-info">
+      <p>Angel Blessy</p>
+      <p>Anna Bino</p>
+      <p>Bhavani K</p>
+    </div>
+    <p>Need help? Visit our <a href="sup">Support Page</a> or <a href="contact">Contact Us</a>.</p>
+</footer>
+
+  <script>
+    const sampleDoctors = [
+        {id:1, name: "Dr. Deepak Devakar", location: "Jayanagar, Bangalore", picture: "dr-deepak-devakar.jpg","detailsLink": "drdeepak" },
+        {id:2, name: "Dr. Dinesh Gowda", location: "Sahakaranagar, Bangalore", picture: "dr-dinesh-gowda.jpg","detailsLink": "drdinesh" },
+        {id:3, name: "Dr. Eswari", location: "Jayanagar 4 Block, Bangalore", picture: "dr-eswari.jpg","detailsLink": "dreswari" },
+        {id:4, name: "Dr. Harish Prasad", location: "BTM Layout, Bangalore", picture: "dr-harish-prasad.jpg","detailsLink": "drharish" },
+        {id:5, name: "Dr. Neha Gupta", location: "HSR Layout, Bangalore", picture: "dr-neha-gupta.jpg","detailsLink": "drneha" },
+        {id:6, name: "Dr. Parthasarathi Dutta Roy", location: "Magrath Road, Bangalore", picture: "dr-parthasarathi-dutta-roy.jpg","detailsLink": "drparthasarathi" },
+        {id:7, name: "Dr. Savitha A S", location: "Indiranagar, Bangalore", picture: "dr-savitha-a-s.jpg","detailsLink": "drsavitha" },
+        {id:8, name: "Dr. Shashidhar T", location: "Jayanagar 4 Block, Bangalore", picture: "dr-shashidhar-t.jpg","detailsLink": "drshashidar" },
+        {id:9, name: "Dr. Sheelavathi Natraj", location: "Koramangala 6 Block, Bangalore", picture: "dr-sheelavathi-natraj.jpg","detailsLink": "drsheelavathi" },
+        {id:10, name: "Dr. Shishira R J", location: "HSR Layout, Bangalore", picture: "dr-shishira-r-j.jpg","detailsLink": "drshishira" }
+      ];
+    const doctordict = {
+      1: "Dr. Deepak Devakar",
+      2: "Dr. Dinesh Gowda",
+      3: "Dr. Eswari",
+      4: "Dr. Harish Prasad",
+      5: "Dr. Neha Gupta",
+      6: "Dr. Parthasarathi Dutta Roy",
+      7: "Dr. Savitha A S",
+      8: "Dr. Shashidhar T",
+      9: "Dr. Sheelavathi Natraj",
+      10: "Dr. Shishira R J"
+    };
+    const doctorContainer = document.getElementById('doctor-container');
+    function renderDoctors(doctors) {
+      doctors.forEach((doctor) => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+        card.innerHTML = `
+          <img src="/static/${doctor.picture}" alt="${doctor.name}">
+          <h3>${doctor.name}</h3>
+          <p><strong>Location:</strong> ${doctor.location}</p>
+          <div>
+  <a href="/profile" style="text-decoration: none;">
+    <button class="consult-btn">Consult Now</button>
+  </a>
+    <button name=${doctor.id} class="appointment-btn">Book an appointment </button>
+</div>
+          <a href="/${doctor.detailsLink}" class="view-details" target="_blank">View Details</a>`;
+        doctorContainer.appendChild(card);
+      });
+    }
+    renderDoctors(sampleDoctors);
+  </script>
+
+  <script>
+    const appointmentButtons = document.querySelectorAll('.appointment-btn');
+    appointmentButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        localStorage.setItem('DoctorName', doctordict[button.name]);
+        window.location.href = '/info2';
+      });
+    });
+  </script>
+
+</body>
+</html>

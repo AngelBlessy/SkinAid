@@ -1,0 +1,295 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctor Profile</title>
+  
+  <style>
+    html {
+      height: 100%;
+    }
+    
+    body {
+      margin: 0;
+    }
+    
+    .bg {
+      animation: slide 5s ease-in-out infinite alternate;
+      background-image: linear-gradient(-60deg, #333 50%, #777 50%);
+      bottom: 0;
+      left: -50%;
+      opacity: 0.7;
+      position: fixed;
+      right: -50%;
+      top: 0;
+      z-index: -1;
+    }
+    
+    .bg2 {
+      animation-direction: alternate-reverse;
+      animation-duration: 6s;
+    }
+    
+    .bg3 {
+      animation-duration: 7s;
+    }
+    
+    .content {
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 0.25em;
+      box-shadow: 0 0 0.25em rgba(0, 0, 0, 0.25);
+      box-sizing: border-box;
+      left: 50%;
+      padding: 10vmin;
+      position: fixed;
+      text-align: center;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    h1 {
+      font-family: monospace;
+    }
+    
+    @keyframes slide {
+      0% {
+        transform: translateX(-20%);
+      }
+      100% {
+        transform: translateX(20%);
+      }
+    }
+    
+     h1 {
+      text-align: center;
+      font-size: 2.5em;
+      color: #ffffff;
+      margin-bottom: 10px;
+     }
+
+
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          min-height: 100vh;
+          background-color: #f4f4f4;
+          color:white;
+        }
+    
+        header {
+          background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(50, 50, 50, 0.7));
+          color: white;
+          padding: 20px 10px;
+          text-align: center;
+          font-size: 28px;
+          font-weight: bold;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+    
+        .container {
+          width: 80%;
+          margin: 20px auto;
+          padding: 20px;
+          background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black */
+
+          border-radius: 10px;
+          position: relative;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    
+        .support-content {
+          background: white;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+    
+        .support-content h2 {
+          color: #004D40;
+        }
+    
+        .support-content p {
+          line-height: 1.6;
+          color: #333;
+        }
+    
+       
+        .translate-button{
+          padding: 12px 25px;
+          font-size: 16px;
+          color: black;
+          background: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          margin: 10px;
+          transition: all 0.3s ease;
+      }
+    
+      footer {
+      margin-top: auto;
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(50, 50, 50, 0.7));
+      color: white;
+      padding: 20px 10px;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    footer .developer-text {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    footer .developer-info {
+      display: flex;
+      justify-content: space-between;
+      width: 80%;
+      margin: 10px auto;
+      font-size: 18px;
+    }
+
+    footer .developer-info p {
+      text-align: center;
+      flex: 1;
+    }
+
+    footer a {
+      color: #FFCCBC; /* Soft coral links */
+      text-decoration: underline;
+    }
+
+    footer a:hover {
+      color: #FFE0B2; /* Lighter coral hover */
+    }footer {
+            margin-top: auto;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(50, 50, 50, 0.7));
+            color: white;
+            text-align: center;
+            padding: 20px 10px;
+            font-size: 14px;
+        }
+
+        footer p {
+            margin: 5px 0;
+            
+        }
+        footer .developer-text {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        footer .developer-info {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            margin-left: 10%;
+            font-size: 18px;
+        }
+  </style>
+</head>
+<body>
+    <div class="bg"></div>
+    <div class="bg bg2"></div>
+    <div class="bg bg3"></div>
+    
+  <header>Skin Cancer Detection System</header>
+  <div class="translate-container">
+    <button class="translate-button" onclick="toggleTranslate()">🌐 Translate</button>
+    <div id="google_translate_element" style="display: none;"></div>
+</div>
+
+<script>
+  function toggleTranslate() {
+      var element = document.getElementById("google_translate_element");
+      if (element.style.display === "none") {
+          element.style.display = "block";
+      } else {
+          element.style.display = "none";
+      }
+  }
+
+  function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+          pageLanguage: 'en',
+          includedLanguages: 'hi,bn,te,mr,ta,ur,gu,ml,kn,pa,or,as', // Indian languages
+          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+
+      // Apply saved translation language
+      var lang = localStorage.getItem("selectedLanguage");
+      if (lang) {
+          setTimeout(() => {
+              document.querySelector("select.goog-te-combo").value = lang;
+              document.querySelector("select.goog-te-combo").dispatchEvent(new Event('change'));
+          }, 2000); // Delay to ensure translation loads
+      }
+  }
+
+  // Listen for language selection and store in localStorage
+  document.addEventListener("change", function(event) {
+      if (event.target.classList.contains("goog-te-combo")) {
+          localStorage.setItem("selectedLanguage", event.target.value);
+      }
+  });
+</script>
+
+<!-- Load Google Translate API -->
+<script type="text/javascript" 
+        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+</script>
+  <div class="container">
+    <h1>Support Us – Together, We Can Save Lives</h1>
+    <div class="profile-section">
+      <div class="profile-details">
+        <h2>Our Mission</h2>
+        <p>At Skinaid+, we are committed to revolutionizing early skin cancer detection using AI technology.</p>
+        <p>Our goal is to make healthcare more accessible, efficient, and affordable, giving people the power to identify potential risks early and seek timely medical attention.</p>
+        <h2>Why Support Skinaid+?</h2>
+        <p>Skin cancer affects millions every year, and early detection can be life-saving. With your help, Skinaid+ can:</p>
+        <ul>
+          <li>Enhance the accuracy and efficiency of our AI detection system.</li>
+          <li>Make this tool accessible to underserved communities.</li>
+          <li>Integrate real-time doctor consultations and appointment booking for timely care.</li>
+          <li>Build a secure, reliable platform for patients and healthcare professionals.</li>
+        </ul>
+        <div class="extra-details">
+          <h2>How You Can Support Us</h2>
+          <h3>1. Make a Donation</h3>
+          <p>Your generous contributions fuel our journey toward innovation.</p>
+          <p>👉 Donate securely via Razorpay.</p>
+          <div style="text-align: center;">
+            <img src="/static/QrCode2.jpeg" alt="Scan to Donate" style="max-width: 200px;">
+            <p>Scan the QR code to donate via Razorpay.</p>
+          </div>
+          <h3>2. Spread the Word</h3>
+          <p>Help us reach more people by sharing Skinaid+ on social media:</p>
+          <ul style="color:#FFCCBC">
+            <li><a href="https://www.facebook.com" style="color:#FFCCBC" target="_blank">Facebook</a></li>
+            <li><a href="https://www.twitter.com" style="color:#FFCCBC" target="_blank">Twitter</a></li>
+            <li><a href="https://www.linkedin.com" style="color:#FFCCBC" target="_blank">LinkedIn</a></li>
+            <li><a href="https://www.instagram.com" style="color:#FFCCBC" target="_blank">Instagram</a></li>
+          </ul>
+          <h3>3. Volunteer or Collaborate</h3>
+          <p>Are you a healthcare professional, AI expert, or enthusiastic supporter? Join us in making a difference.</p>
+          <p>👉 <a href="contact" style="color:  #FFCCBC;">Contact Us</a> to get involved.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <p class="developer-text">Designed and Developed by:</p>
+    <div class="developer-info">
+      <p>Angel Blessy</p>
+      <p>Anna Bino</p>
+      <p>Bhavani K</p>
+    </div>
+    <p>Need help? Visit our <a href="contact" style=" color:#FFCCBC;">Contact Us</a>.</p>
+    
+  </footer>
+</body>
+</html>

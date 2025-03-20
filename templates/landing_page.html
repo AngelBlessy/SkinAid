@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Cancer Detection - Entry Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <div class="bg"></div>
+  <div class="bg bg2"></div>
+  <div class="bg bg3"></div>
+
+    <!-- Header -->
+    <header>
+        Skin Cancer Detection & Classification
+    </header>
+    <div class="translate-container">
+        <button class="translate-button" onclick="toggleTranslate()">🌐 Translate</button>
+        <div id="google_translate_element" style="display: none;"></div>
+    </div>
+    
+    <script>
+      function toggleTranslate() {
+          var element = document.getElementById("google_translate_element");
+          if (element.style.display === "none") {
+              element.style.display = "block";
+          } else {
+              element.style.display = "none";
+          }
+      }
+    
+      function googleTranslateElementInit() {
+          new google.translate.TranslateElement({
+              pageLanguage: 'en',
+              includedLanguages: 'hi,bn,te,mr,ta,ur,gu,ml,kn,pa,or,as', // Indian languages
+              layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+          }, 'google_translate_element');
+    
+          // Apply saved translation language
+          var lang = localStorage.getItem("selectedLanguage");
+          if (lang) {
+              setTimeout(() => {
+                  document.querySelector("select.goog-te-combo").value = lang;
+                  document.querySelector("select.goog-te-combo").dispatchEvent(new Event('change'));
+              }, 2000); // Delay to ensure translation loads
+          }
+      }
+    
+      // Listen for language selection and store in localStorage
+      document.addEventListener("change", function(event) {
+          if (event.target.classList.contains("goog-te-combo")) {
+              localStorage.setItem("selectedLanguage", event.target.value);
+          }
+      });
+    </script>
+    
+    <!-- Load Google Translate API -->
+    <script type="text/javascript" 
+            src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Welcome to the Skin Cancer Detection System</h1>
+        <p class="subtitle">Empowering early diagnosis with cutting-edge technology.</p>
+
+        <div class="image-container">
+            <img src="static/logo.png" alt="Skin Cancer Detection Image">
+        </div>
+
+        <p class="description">
+            Our state-of-the-art **Skin Cancer Detection System** is designed to help individuals and healthcare providers 
+            identify skin abnormalities early. Using advanced machine learning and image classification algorithms, 
+            we provide reliable results to aid in accurate diagnosis. Trust us to help protect your skin and health.
+        </p>
+
+        <div class="button-group">
+            <a href="login">
+                <button>Login</button>
+            </a>
+            <a href="Signin">
+                <button>SignUp</button>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    
+    <footer>
+      <p class="developer-text">Designed and Developed by:</p>
+      <div class="developer-info">
+        <p>Angel Blessy</p>
+        <p>Anna Bino</p>
+        <p>Bhavani K</p>
+      </div>
+      <p>Need help? Visit our <a href="sup">Support Page</a> or <a href="contact">Contact Us</a>.</p>
+    </footer>
+
+</body>
+</html>
