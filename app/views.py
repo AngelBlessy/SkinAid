@@ -278,24 +278,84 @@ def reset_password_api(request):
 
 @csrf_exempt
 def predict_result_api(request):
+    """
+    API endpoint to handle image uploads and return prediction results.
+    Enhanced with better error handling for mobile devices.
+    """
     if request.method == "POST":
-        """data = json.loads(request.body)
-        print(data)"""
+        response_data = {"status": "failed", "message": "Unknown error occurred"}
 
-        form = UploadFileForm(request.POST, request.FILES)
-        print(form.errors)
+        try:
+            # Check if we received any files
+            if "file" not in request.FILES:
+                response_data["message"] = "No file uploaded"
+                return JsonResponse(response_data)
 
-        if form.is_valid():
-            print("Got file:", request.FILES["file"])
+            # Get the uploaded file
+            uploaded_file = request.FILES["file"]
 
-        # save temp file
-        with open("temp.jpg", "wb") as f:
-            f.write(request.FILES["file"].read())
+            # Log file information
+            print(
+                f"Received file: {uploaded_file.name}, Size: {uploaded_file.size} bytes, Content-Type: {uploaded_file.content_type}"
+            )
 
-        result = predict("app/scripts/skin_lesion_model.pth", "temp.jpg")
-        return JsonResponse({"status": "success", "result": result})
+            # Verify the file has content
+            if uploaded_file.size == 0:
+                response_data["message"] = "Uploaded file is empty"
+                return JsonResponse(response_data)
 
-    return JsonResponse({"status": "failed"})
+            # Check file type
+            if not uploaded_file.content_type.startswith("image/"):
+                response_data["message"] = (
+                    f"Invalid file type: {uploaded_file.content_type}"
+                )
+                return JsonResponse(response_data)
+
+            # Check file size (5MB limit)
+            if uploaded_file.size > 5 * 1024 * 1024:  # 5MB
+                response_data["message"] = "File too large (max 5MB)"
+                return JsonResponse(response_data)
+
+            # Save temp file
+            temp_path = "temp.jpg"
+            with open(temp_path, "wb") as f:
+                for chunk in uploaded_file.chunks():
+                    f.write(chunk)
+
+            print(f"Temporary file saved to {temp_path}")
+
+            # Process the image and get prediction
+            try:
+                model_path = "app/scripts/skin_lesion_model.pth"
+                print(
+                    f"Calling predict function with model: {model_path}, image: {temp_path}"
+                )
+                result = predict(model_path, temp_path)
+
+                print(f"Prediction result: {result}")
+                return JsonResponse({"status": "success", "result": result})
+
+            except Exception as e:
+                import traceback
+
+                traceback_str = traceback.format_exc()
+                error_message = str(e)
+                print(f"Error during prediction: {error_message}")
+                print(f"Traceback: {traceback_str}")
+                response_data["message"] = f"Prediction error: {error_message}"
+                return JsonResponse(response_data)
+
+        except Exception as e:
+            import traceback
+
+            traceback_str = traceback.format_exc()
+            error_message = str(e)
+            print(f"General error: {error_message}")
+            print(f"Traceback: {traceback_str}")
+            response_data["message"] = f"Server error: {error_message}"
+            return JsonResponse(response_data)
+
+    return JsonResponse({"status": "failed", "message": "Invalid request method"})
 
 
 def add_doctor_dict(request):
